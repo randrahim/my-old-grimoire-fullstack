@@ -13,7 +13,7 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
-  res.json({ message: "Your request was successful! " });
+  res.json({ message: "Your request was successful!" });
   next();
 });
 
