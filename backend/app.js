@@ -88,10 +88,24 @@ app.put("/api/books/:id", (req, res, next) => {
     ratings: req.body.ratings,
     averageRating: req.body.averageRating,
   });
-  Book.updateOne({ _id: req.params.id }, book)
+  Book.updateOne({ id: req.params.id }, book)
     .then(() => {
       res.status(201).json({
         message: "Book updated successfully!",
+      });
+    })
+    .catch((error) => {
+      res.status(400).json({
+        error: error,
+      });
+    });
+});
+
+app.delete("/api/books/:id", (req, res, next) => {
+  Book.deleteOne({ id: req.params.id })
+    .then(() => {
+      res.status(200).json({
+        message: "Deleted!",
       });
     })
     .catch((error) => {
