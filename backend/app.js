@@ -63,7 +63,7 @@ app.post("/api/books", (req, res, next) => {
   // });
 });
 
-app.get("/api/book/:id", (req, res, next) => {
+app.get("/api/books/:id", (req, res, next) => {
   Book.findOne({
     _id: req.params.id,
   })
@@ -72,6 +72,30 @@ app.get("/api/book/:id", (req, res, next) => {
     })
     .catch((error) => {
       res.status(404).json({
+        error: error,
+      });
+    });
+});
+
+app.put("/api/books/:id", (req, res, next) => {
+  const book = new Book({
+    id: req.params.id,
+    title: req.body.title,
+    author: req.body.author,
+    imageUrl: req.body.imageUrl,
+    year: req.body.year,
+    genre: req.body.genre,
+    ratings: req.body.ratings,
+    averageRating: req.body.averageRating,
+  });
+  Book.updateOne({ _id: req.params.id }, book)
+    .then(() => {
+      res.status(201).json({
+        message: "Book updated successfully!",
+      });
+    })
+    .catch((error) => {
+      res.status(400).json({
         error: error,
       });
     });
