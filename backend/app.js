@@ -2,6 +2,8 @@ const express = require("express");
 
 const app = express();
 
+app.use(express.json());
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -15,14 +17,22 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api/books", (req, res, next) => {
+app.post("/api/books", (req, res, next) => {
+  console.log(req.body);
+  res.status(201).json({
+    message: "New Book has been created successfully!",
+  });
+});
+
+app.get("/api/books", (req, res, next) => {
   console.log("Books received!");
   const book = [
     {
       id: "1",
       title: "Book1 title",
       author: "Book1 author",
-      imageUrl: "Book1 imageUrl",
+      imageUrl:
+        "https://img.freepik.com/free-photo/book-composition-with-open-book_23-2147690555.jpg",
       year: 1980,
       genre: "Book1 genre",
       ratings: [
@@ -37,7 +47,8 @@ app.use("/api/books", (req, res, next) => {
       id: "2",
       title: "Book2 title",
       author: "Book2 author",
-      imageUrl: "Book2 imageUrl",
+      imageUrl:
+        "https://img.freepik.com/free-photo/book-composition-with-open-book_23-2147690555.jpg",
       year: 1980,
       genre: "Book2 genre",
       ratings: [
