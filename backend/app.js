@@ -1,8 +1,22 @@
+// password: aqiulPku6KhqVogX
 const express = require("express");
 
 const app = express();
 
 app.use(express.json());
+const mongoose = require("mongoose");
+
+mongoose
+  .connect(
+    "mongodb+srv://randtest:aqiulPku6KhqVogX@cluster0.whnuo.mongodb.net/"
+  )
+  .then(() => {
+    console.log("Successfully connected to MongoDB Atlas!");
+  })
+  .catch((error) => {
+    console.log("Unable to connect to MongoDB Atlas!");
+    console.error(error);
+  });
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
