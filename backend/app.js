@@ -36,10 +36,31 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 app.post("/api/books", (req, res, next) => {
-  console.log(req.body);
-  res.status(201).json({
-    message: "New Book has been created successfully!",
+  const book = new Book({
+    title: req.body.title,
+    author: req.body.author,
+    imageUrl: req.body.imageUrl,
+    year: req.body.year,
+    genre: req.body.genre,
+    ratings: req.body.ratings,
+    averageRating: req.body.averageRating,
   });
+  book
+    .save()
+    .then(() => {
+      res.status(201).json({
+        message: "Post saved successfully!",
+      });
+    })
+    .catch((error) => {
+      res.status(400).json({
+        error: error,
+      });
+    });
+  // console.log(req.body);
+  // res.status(201).json({
+  //   message: "New Book has been created successfully!",
+  // });
 });
 
 app.get("/api/books", (req, res, next) => {
