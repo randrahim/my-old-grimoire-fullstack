@@ -63,43 +63,66 @@ app.post("/api/books", (req, res, next) => {
   // });
 });
 
-app.get("/api/books", (req, res, next) => {
-  console.log("Books received!");
-  const book = [
-    {
-      id: "1",
-      title: "Book1 title",
-      author: "Book1 author",
-      imageUrl:
-        "https://img.freepik.com/free-photo/book-composition-with-open-book_23-2147690555.jpg",
-      year: 1980,
-      genre: "Book1 genre",
-      ratings: [
-        {
-          userId: "Book1 userId",
-          grade: 5,
-        },
-      ],
-      averageRating: 8,
-    },
-    {
-      id: "2",
-      title: "Book2 title",
-      author: "Book2 author",
-      imageUrl:
-        "https://img.freepik.com/free-photo/book-composition-with-open-book_23-2147690555.jpg",
-      year: 1980,
-      genre: "Book2 genre",
-      ratings: [
-        {
-          userId: "Book2 userId",
-          grade: 5,
-        },
-      ],
-      averageRating: 8,
-    },
-  ];
-  res.status(200).json(book);
+app.get("/api/book/:id", (req, res, next) => {
+  Book.findOne({
+    _id: req.params.id,
+  })
+    .then((book) => {
+      res.status(200).json(book);
+    })
+    .catch((error) => {
+      res.status(404).json({
+        error: error,
+      });
+    });
+});
+
+app.use("/api/books", (req, res, next) => {
+  Book.find()
+    .then((books) => {
+      res.status(200).json(books);
+    })
+    .catch((error) => {
+      res.status(400).json({
+        error: error,
+      });
+    });
+  // console.log("Books received!");
+  // const book = [
+  //   {
+  //     id: "1",
+  //     title: "Book1 title",
+  //     author: "Book1 author",
+  //     imageUrl:
+  //       "https://img.freepik.com/free-photo/book-composition-with-open-book_23-2147690555.jpg",
+  //     year: 1980,
+  //     genre: "Book1 genre",
+  //     ratings: [
+  //       {
+  //         userId: "Book1 userId",
+  //         grade: 5,
+  //       },
+  //     ],
+  //     averageRating: 8,
+  //   },
+  //   {
+  //     id: "2",
+  //     title: "Book2 title",
+  //     author: "Book2 author",
+  //     imageUrl:
+  //       "https://img.freepik.com/free-photo/book-composition-with-open-book_23-2147690555.jpg",
+  //     year: 1980,
+  //     genre: "Book2 genre",
+  //     ratings: [
+  //       {
+  //         userId: "Book2 userId",
+  //         grade: 5,
+  //       },
+  //     ],
+  //     averageRating: 8,
+  //   },
+  // ];
+  // res.status(200).json(book);
 });
 
 // app.use((req, res, next) => {
