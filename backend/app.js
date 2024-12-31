@@ -1,10 +1,12 @@
 // password: aqiulPku6KhqVogX
 const express = require("express");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+
+const Book = require("./models/book");
 
 const app = express();
-
 app.use(express.json());
-const mongoose = require("mongoose");
 
 mongoose
   .connect(
@@ -30,6 +32,8 @@ app.use((req, res, next) => {
   );
   next();
 });
+
+app.use(bodyParser.json());
 
 app.post("/api/books", (req, res, next) => {
   console.log(req.body);
