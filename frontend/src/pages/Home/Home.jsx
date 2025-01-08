@@ -34,7 +34,7 @@ function Home() {
         <header className={styles.head}>
           <h1>Our books</h1>
           <p>to read and re-read</p>
-          <Link to="/Ajouter" className="button">
+          <Link to="/Add" className="button">
             + Add a book
           </Link>
         </header>
