@@ -85,7 +85,7 @@ function SignIn({ setUser }) {
       </div>
       <div className={styles.Form}>
         <label htmlFor={email}>
-          <p>Adresse email</p>
+          <p>Email Address</p>
           <input
             className=""
             type="text"
@@ -98,7 +98,7 @@ function SignIn({ setUser }) {
           />
         </label>
         <label htmlFor="password">
-          <p>Mot de passe</p>
+          <p>Password</p>
           <input
             className="border-2 outline-none p-2 rounded-md"
             type="password"
@@ -120,9 +120,9 @@ function SignIn({ setUser }) {
             onClick={signIn}
           >
             {isLoading ? <div className="" /> : null}
-            <span>Se connecter</span>
+            <span>Login</span>
           </button>
-          <span>OU</span>
+          <span>OR</span>
           <button
             type="submit"
             className="
