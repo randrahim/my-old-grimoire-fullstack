@@ -34,46 +34,53 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json());
-// app.use("/api/books", bookRoutes);
+app.use("/api/books", bookRoutes);
 app.use("/api/auth", userRoutes);
 
 // To test the hardcoded added books
-app.use("/api/books", (req, res, next) => {
-  console.log("Books received!");
-  const book = [
-    {
-      id: "1",
-      title: "Book1 title",
-      author: "Book1 author",
-      imageUrl:
-        "https://shop.merriam-webster.com/cdn/shop/files/Britannicas-Encyclopedia-Infographica-cover-min.jpg?v=1698937268",
-      year: 1980,
-      genre: "Book1 genre",
-      ratings: [
-        {
-          userId: "Book1 userId",
-          grade: 5,
-        },
-      ],
-      averageRating: 8,
-    },
-    {
-      id: "2",
-      title: "Book2 title",
-      author: "Book2 author",
-      imageUrl:
-        "https://shop.merriam-webster.com/cdn/shop/products/Britannica-All-New-Kids-Encyclopedia.jpg?v=1649966577&width=533",
-      year: 1980,
-      genre: "Book2 genre",
-      ratings: [
-        {
-          userId: "Book2 userId",
-          grade: 4,
-        },
-      ],
-      averageRating: 4,
-    },
-  ];
-  res.status(200).json(book);
-});
+// app.post("/api/books", (req, res, next) => {
+//   console.log("New book added", req.body);
+//   res.status(201).json({
+//     message: "Book created successfully!",
+//   });
+// });
+
+// app.get("/api/books", (req, res, next) => {
+//   console.log("Books received!");
+//   const book = [
+//     {
+//       id: "1",
+//       title: "Book1 title",
+//       author: "Book1 author",
+//       imageUrl:
+//         "https://shop.merriam-webster.com/cdn/shop/files/Britannicas-Encyclopedia-Infographica-cover-min.jpg?v=1698937268",
+//       year: 1980,
+//       genre: "Book1 genre",
+//       ratings: [
+//         {
+//           userId: "Book1 userId",
+//           grade: 5,
+//         },
+//       ],
+//       averageRating: 8,
+//     },
+//     {
+//       id: "2",
+//       title: "Book2 title",
+//       author: "Book2 author",
+//       imageUrl:
+//         "https://shop.merriam-webster.com/cdn/shop/products/Britannica-All-New-Kids-Encyclopedia.jpg?v=1649966577&width=533",
+//       year: 1980,
+//       genre: "Book2 genre",
+//       ratings: [
+//         {
+//           userId: "Book2 userId",
+//           grade: 4,
+//         },
+//       ],
+//       averageRating: 4,
+//     },
+//   ];
+//   res.status(200).json(book);
+// });
 module.exports = app;
