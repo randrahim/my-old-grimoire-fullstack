@@ -51,7 +51,7 @@ function BookForm({ book, validate }) {
     // When we create a new book
     if (!book) {
       if (!data.file[0]) {
-        alert("Vous devez ajouter une image");
+        alert("You must add an image");
       }
       if (!data.rating) {
         /* eslint-disable no-param-reassign */
