@@ -2,7 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
-const Book = require("./models/book");
+const bookRoutes = require("./routes/books");
+const userRoutes = require("./routes/user");
 
 const app = express();
 app.use(express.json());
@@ -33,152 +34,7 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json());
-
-app.post("/api/books", (req, res, next) => {
-  const book = new Book({
-    title: req.body.title,
-    author: req.body.author,
-    imageUrl: req.body.imageUrl,
-    year: req.body.year,
-    genre: req.body.genre,
-    ratings: req.body.ratings,
-    averageRating: req.body.averageRating,
-  });
-  book
-    .save()
-    .then(() => {
-      res.status(201).json({
-        message: "Post saved successfully!",
-      });
-    })
-    .catch((error) => {
-      res.status(400).json({
-        error: error,
-      });
-    });
-  // console.log(req.body);
-  // res.status(201).json({
-  //   message: "New Book has been created successfully!",
-  // });
-});
-
-app.get("/api/books/:id", (req, res, next) => {
-  Book.findOne({
-    _id: req.params.id,
-  })
-    .then((book) => {
-      res.status(200).json(book);
-    })
-    .catch((error) => {
-      res.status(404).json({
-        error: error,
-      });
-    });
-});
-
-app.put("/api/books/:id", (req, res, next) => {
-  const book = new Book({
-    id: req.params.id,
-    title: req.body.title,
-    author: req.body.author,
-    imageUrl: req.body.imageUrl,
-    year: req.body.year,
-    genre: req.body.genre,
-    ratings: req.body.ratings,
-    averageRating: req.body.averageRating,
-  });
-  Book.updateOne({ id: req.params.id }, book)
-    .then(() => {
-      res.status(201).json({
-        message: "Book updated successfully!",
-      });
-    })
-    .catch((error) => {
-      res.status(400).json({
-        error: error,
-      });
-    });
-});
-
-app.delete("/api/books/:id", (req, res, next) => {
-  Book.deleteOne({ id: req.params.id })
-    .then(() => {
-      res.status(200).json({
-        message: "Deleted!",
-      });
-    })
-    .catch((error) => {
-      res.status(400).json({
-        error: error,
-      });
-    });
-});
-
-app.use("/api/books", (req, res, next) => {
-  Book.find()
-    .then((books) => {
-      res.status(200).json(books);
-    })
-    .catch((error) => {
-      res.status(400).json({
-        error: error,
-      });
-    });
-  // console.log("Books received!");
-  // const book = [
-  //   {
-  //     id: "1",
-  //     title: "Book1 title",
-  //     author: "Book1 author",
-  //     imageUrl:
-  //       "https://img.freepik.com/free-photo/book-composition-with-open-book_23-2147690555.jpg",
-  //     year: 1980,
-  //     genre: "Book1 genre",
-  //     ratings: [
-  //       {
-  //         userId: "Book1 userId",
-  //         grade: 5,
-  //       },
-  //     ],
-  //     averageRating: 8,
-  //   },
-  //   {
-  //     id: "2",
-  //     title: "Book2 title",
-  //     author: "Book2 author",
-  //     imageUrl:
-  //       "https://img.freepik.com/free-photo/book-composition-with-open-book_23-2147690555.jpg",
-  //     year: 1980,
-  //     genre: "Book2 genre",
-  //     ratings: [
-  //       {
-  //         userId: "Book2 userId",
-  //         grade: 5,
-  //       },
-  //     ],
-  //     averageRating: 8,
-  //   },
-  // ];
-  // res.status(200).json(book);
-});
-
-// app.use((req, res, next) => {
-//   console.log("Request received!");
-//   next();
-// });
-
-// app.use((req, res, next) => {
-//   res.status(201);
-//   next();
-// });
-
-// app.use((req, res, next) => {
-//   res.json({ message: "Your request was successful!" });
-//   next();
-// });
-
-// app.use((req, res, next) => {
-//   console.log("Response sent successfully!");
-// });
+app.use("/api/books", bookRoutes);
+app.use("/api/auth", userRoutes);
 
 module.exports = app;
