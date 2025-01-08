@@ -40,7 +40,7 @@ exports.getOneBook = (req, res, next) => {
 
 exports.modifyBook = (req, res, next) => {
   const book = new Book({
-    id: req.params.id,
+    _id: req.params.id,
     title: req.body.title,
     author: req.body.author,
     imageUrl: req.body.imageUrl,
@@ -49,7 +49,7 @@ exports.modifyBook = (req, res, next) => {
     ratings: req.body.ratings,
     averageRating: req.body.averageRating,
   });
-  Book.updateOne({ id: req.params.id }, book)
+  Book.updateOne({ _id: req.params.id }, book)
     .then(() => {
       res.status(201).json({
         message: "Book updated successfully!",
@@ -63,7 +63,7 @@ exports.modifyBook = (req, res, next) => {
 };
 
 exports.deleteBook = (req, res, next) => {
-  Book.deleteOne({ id: req.params.id })
+  Book.deleteOne({ _id: req.params.id })
     .then(() => {
       res.status(200).json({
         message: "Deleted!",
