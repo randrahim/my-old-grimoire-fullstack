@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json());
 // app.use("/api/books", bookRoutes);
-// app.use("/api/auth", userRoutes);
+app.use("/api/auth", userRoutes);
 
 // To test the hardcoded added books
 app.use("/api/books", (req, res, next) => {
@@ -46,7 +46,7 @@ app.use("/api/books", (req, res, next) => {
       title: "Book1 title",
       author: "Book1 author",
       imageUrl:
-        "https://img.freepik.com/free-photo/book-composition-with-open-book_23-2147690555.jpg",
+        "https://shop.merriam-webster.com/cdn/shop/files/Britannicas-Encyclopedia-Infographica-cover-min.jpg?v=1698937268",
       year: 1980,
       genre: "Book1 genre",
       ratings: [
@@ -62,16 +62,16 @@ app.use("/api/books", (req, res, next) => {
       title: "Book2 title",
       author: "Book2 author",
       imageUrl:
-        "https://img.freepik.com/free-photo/book-composition-with-open-book_23-2147690555.jpg",
+        "https://shop.merriam-webster.com/cdn/shop/products/Britannica-All-New-Kids-Encyclopedia.jpg?v=1649966577&width=533",
       year: 1980,
       genre: "Book2 genre",
       ratings: [
         {
           userId: "Book2 userId",
-          grade: 5,
+          grade: 4,
         },
       ],
-      averageRating: 8,
+      averageRating: 4,
     },
   ];
   res.status(200).json(book);
