@@ -31,7 +31,7 @@ function Header({ user, setUser }) {
           </li>
           <li>
             <NavLink
-              to="/Add"
+              to="/Ajouter"
               className={({ isActive }) =>
                 isActive ? styles.activeLink : undefined
               }
