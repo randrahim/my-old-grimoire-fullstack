@@ -6,7 +6,7 @@ const bookRoutes = require("./routes/book");
 const userRoutes = require("./routes/user");
 
 const app = express();
-app.use(express.json());
+// app.use(express.json());
 
 mongoose
   .connect(
