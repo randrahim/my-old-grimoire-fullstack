@@ -9,6 +9,7 @@ exports.createBook = (req, res, next) => {
     genre: req.body.genre,
     ratings: req.body.ratings,
     averageRating: req.body.averageRating,
+    userId: req.body.userId,
   });
   book
     .save()
@@ -48,6 +49,7 @@ exports.modifyBook = (req, res, next) => {
     genre: req.body.genre,
     ratings: req.body.ratings,
     averageRating: req.body.averageRating,
+    userId: req.body.userId,
   });
   Book.updateOne({ _id: req.params.id }, book)
     .then(() => {
