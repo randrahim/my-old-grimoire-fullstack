@@ -3,7 +3,6 @@ const router = express.Router();
 
 const auth = require("../middleware/auth");
 const bookCtrl = require("../controllers/books");
-// const Book = require("../models/book");
 
 router.get("/", auth, bookCtrl.getAllBooks);
 router.post("/", auth, bookCtrl.createBook);
