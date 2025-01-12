@@ -7,7 +7,7 @@ exports.createBook = (req, res, next) => {
   const book = new Book({
     title: req.body.book.title,
     author: req.body.book.author,
-    imageUrl: req.body.book.imageUrl,
+    imageUrl: url + "/images/" + req.file.filename,
     year: req.body.book.year,
     genre: req.body.book.genre,
     ratings: req.body.book.ratings,
@@ -82,44 +82,7 @@ exports.modifyBook = (req, res, next) => {
         error: error,
       });
     });
-  Book.updateOne({ _id: req.params.id }, book)
-    .then(() => {
-      res.status(201).json({
-        message: "Book updated successfully!",
-      });
-    })
-    .catch((error) => {
-      res.status(400).json({
-        error: error,
-      });
-    });
 };
-
-exports.getAllBooks = (req, res, next) => {
-  Book.find()
-    .then((books) => {
-      res.status(200).json(books);
-    })
-    .catch((error) => {
-      res.status(400).json({
-        error: error,
-      });
-    });
-};
-
-// exports.deleteBook = (req, res, next) => {
-//   Book.deleteOne({ _id: req.params.id })
-//     .then(() => {
-//       res.status(200).json({
-//         message: "Deleted!",
-//       });
-//     })
-//     .catch((error) => {
-//       res.status(400).json({
-//         error: error,
-//       });
-//     });
-// };
 
 exports.deleteBook = (req, res, next) => {
   Book.findOne({ _id: req.params.id }).then((book) => {
@@ -138,4 +101,16 @@ exports.deleteBook = (req, res, next) => {
         });
     });
   });
+};
+
+exports.getAllBooks = (req, res, next) => {
+  Book.find()
+    .then((books) => {
+      res.status(200).json(books);
+    })
+    .catch((error) => {
+      res.status(400).json({
+        error: error,
+      });
+    });
 };
