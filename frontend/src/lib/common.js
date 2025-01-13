@@ -101,10 +101,7 @@ export async function deleteBook(id) {
 }
 
 export async function rateBook(id, userId, rating) {
-  const data = {
-    userId,
-    rating: parseInt(rating, 10),
-  };
+  const data = { userId, rating: parseInt(rating, 10) };
 
   try {
     const response = await axios.post(
@@ -117,8 +114,7 @@ export async function rateBook(id, userId, rating) {
       }
     );
     const book = response.data;
-    // eslint-disable-next-line no-underscore-dangle
-    book.id = book._id;
+    book.id = book._id; // Map the backend response properly
     return book;
   } catch (e) {
     console.error(e);

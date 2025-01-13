@@ -122,3 +122,35 @@ exports.getBestRatedBooks = (req, res, next) => {
     .then((books) => res.status(200).json(books))
     .catch((error) => res.status(400).json({ error: error.message }));
 };
+
+exports.rateBook = async (req, res, next) => {
+  const bookId = req.params.id;
+  const { userId, rating } = req.body;
+
+  try {
+    // Fetch the book from the database
+    const book = await Book.findById(bookId);
+    if (!book) {
+      return res.status(404).json({ message: "Book not found" });
+    }
+
+    // Add or update the user's rating
+    const existingRating = book.ratings.find((r) => r.userId === userId);
+    if (existingRating) {
+      existingRating.grade = rating;
+    } else {
+      book.ratings.push({ userId, grade: rating });
+    }
+
+    // Recalculate the average rating
+    const totalRatings = book.ratings.reduce((sum, r) => sum + r.grade, 0);
+    book.averageRating = totalRatings / book.ratings.length;
+
+    // Save the updated book
+    await book.save();
+
+    res.status(200).json({ message: "Rating updated successfully", book });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
