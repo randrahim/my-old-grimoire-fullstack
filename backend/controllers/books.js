@@ -127,8 +127,12 @@ exports.rateBook = async (req, res, next) => {
   const bookId = req.params.id;
   const { userId, rating } = req.body;
 
+  // Validate input
+  if (!userId || typeof rating !== "number" || rating <= 0 || rating > 5) {
+    return res.status(400).json({ message: "Invalid userId or rating." });
+  }
+
   try {
-    // Fetch the book from the database
     const book = await Book.findById(bookId);
     if (!book) {
       return res.status(404).json({ message: "Book not found" });
@@ -136,8 +140,10 @@ exports.rateBook = async (req, res, next) => {
 
     // Add or update the user's rating
     const existingRating = book.ratings.find((r) => r.userId === userId);
+
     if (existingRating) {
-      existingRating.grade = rating;
+      existingRating.grade = rating; // Update the rating
+      book.markModified("ratings"); // Ensure Mongoose tracks the change
     } else {
       book.ratings.push({ userId, grade: rating });
     }
@@ -151,6 +157,7 @@ exports.rateBook = async (req, res, next) => {
 
     res.status(200).json({ message: "Rating updated successfully", book });
   } catch (error) {
+    console.error("Error updating rating:", error);
     res.status(500).json({ error: error.message });
   }
 };

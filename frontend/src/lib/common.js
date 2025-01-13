@@ -113,12 +113,10 @@ export async function rateBook(id, userId, rating) {
         },
       }
     );
-    const book = response.data;
-    book.id = book._id; // Map the backend response properly
-    return book;
-  } catch (e) {
-    console.error(e);
-    return e.message;
+    return response.data.book;
+  } catch (error) {
+    console.error("Error rating book:", error.response?.data || error.message);
+    return null; // Return null to indicate failure
   }
 }
 

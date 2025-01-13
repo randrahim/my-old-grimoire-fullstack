@@ -27,14 +27,20 @@ function BookRatingForm({ rating, setRating, userId, setBook, id, userRated }) {
   const onSubmit = async () => {
     if (!connectedUser || !auth) {
       navigate(APP_ROUTES.SIGN_IN);
+      return;
     }
-    const update = await rateBook(id, userId, rating);
-    console.log(update);
-    if (update) {
-      // eslint-disable-next-line no-underscore-dangle
-      setBook({ ...update, id: update._id });
-    } else {
-      alert(update);
+
+    try {
+      const updatedBook = await rateBook(id, userId, rating);
+      if (updatedBook) {
+        // Update the book state with the new data
+        setBook({ ...updatedBook, id: updatedBook._id });
+      } else {
+        alert("Failed to update the rating. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error in rating submission:", error);
+      alert("An error occurred. Please try again later.");
     }
   };
   return (
