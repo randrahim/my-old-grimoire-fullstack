@@ -76,6 +76,9 @@ export async function getBestRatedBooks() {
     const response = await axios({
       method: "GET",
       url: `${API_ROUTES.BEST_RATED}`,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     });
     return formatBooks(response.data);
   } catch (e) {
