@@ -40,7 +40,7 @@ function BookRatingForm({ rating, setRating, userId, setBook, id, userRated }) {
   return (
     <div className={styles.BookRatingForm}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <p>{rating > 0 ? "Votre Note" : "Notez cet ouvrage"}</p>
+        <p>{rating > 0 ? "Your Rating" : "Rate this book"}</p>
         <div className={styles.Stars}>
           {!userRated
             ? generateStarsInputs(rating, register)
