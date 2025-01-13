@@ -33,7 +33,7 @@ function AddBook() {
           <div className={styles.Created}>
             <h1>Thank you!</h1>
             <p>Your book has been published successfully.</p>
-            <img src={bookAdd} alt="Livre ajouté" />
+            <img src={bookAdd} alt="Book added" />
             <Link to="/" className="button">
               Back to home
             </Link>

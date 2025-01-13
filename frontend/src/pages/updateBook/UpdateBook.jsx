@@ -45,7 +45,7 @@ function UpdateBook() {
           <div className={styles.Created}>
             <h1>Thank you!</h1>
             <p>Your book has been successfully updated</p>
-            <img src={bookAdd} alt="Livre mis à jour" />
+            <img src={bookAdd} alt="Book updated" />
             <Link to="/" className="button">
               Back to home
             </Link>

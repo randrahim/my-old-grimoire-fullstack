@@ -10,6 +10,6 @@ export const APP_ROUTES = {
   SIGN_UP: "/Inscription",
   SIGN_IN: "/Login",
   ADD_BOOK: "/Add",
-  BOOK: "/livre/:id",
-  UPDATE_BOOK: "livre/modifier/:id",
+  BOOK: "/book/:id",
+  UPDATE_BOOK: "book/modifier/:id",
 };

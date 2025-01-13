@@ -78,7 +78,7 @@ function Book() {
               <div className={styles.Owner}>
                 <p>You have published this work, you can :</p>
                 <p>
-                  <Link to={`/livre/modifier/${book.id}`}>Modify</Link>{" "}
+                  <Link to={`/book/modifier/${book.id}`}>Modify</Link>{" "}
                   <span
                     tabIndex={0}
                     role="button"
