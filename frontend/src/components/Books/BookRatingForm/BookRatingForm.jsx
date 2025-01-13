@@ -46,7 +46,7 @@ function BookRatingForm({ rating, setRating, userId, setBook, id, userRated }) {
             ? generateStarsInputs(rating, register)
             : displayStars(rating)}
         </div>
-        {!userRated ? <button type="submit">To Validate</button> : null}
+        {!userRated ? <button type="submit">Confirm</button> : null}
       </form>
     </div>
   );
