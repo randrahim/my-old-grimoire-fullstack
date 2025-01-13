@@ -114,3 +114,11 @@ exports.getAllBooks = (req, res, next) => {
       });
     });
 };
+
+exports.getBestRatedBooks = (req, res, next) => {
+  Book.find()
+    .sort({ averageRating: -1 }) // Sort by averageRating in descending order
+    .limit(5) // Optional: Limit to the top 5 books
+    .then((books) => res.status(200).json(books))
+    .catch((error) => res.status(400).json({ error: error.message }));
+};
