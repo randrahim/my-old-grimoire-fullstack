@@ -13,3 +13,8 @@ Then use `npm install -g nodemon` and run `nodemon server` command to run the se
 Use the `npm install express` to install express.
 
 #test push
+
+## API endpoints:
+
+http://localhost:4000/api/books/
+http://localhost:4000/api/books/bestrating
